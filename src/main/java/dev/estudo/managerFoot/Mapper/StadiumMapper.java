@@ -4,26 +4,13 @@ package dev.estudo.managerFoot.Mapper;
 import dev.estudo.managerFoot.Controller.request.StadiumRequest;
 import dev.estudo.managerFoot.Controller.response.StadiumResponse;
 import dev.estudo.managerFoot.Entity.Stadium;
+import org.mapstruct.Mapper;
 
-public class StadiumMapper {
+@Mapper(componentModel = "spring")
+public interface StadiumMapper {
 
-    public static StadiumResponse toStadiumResponse(Stadium stadium){
-        return StadiumResponse.builder()
-                .id(stadium.getId())
-                .name(stadium.getName())
-                .city(stadium.getCity())
-                .capacity(stadium.getCapacity())
-                .urlImg(stadium.getUrlImg())
-                .build();
-    }
+    StadiumResponse toStadiumResponse(Stadium stadium);
 
-    public static Stadium toStadium (StadiumRequest stadiumRequest){
-        return Stadium.builder()
-                .name(stadiumRequest.getName())
-                .city(stadiumRequest.getCity())
-                .capacity(stadiumRequest.getCapacity())
-                .urlImg(stadiumRequest.getUrlImg())
-                .build();
-    }
+    Stadium toStadium (StadiumRequest stadiumRequest);
 
 }

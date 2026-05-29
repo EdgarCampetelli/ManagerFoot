@@ -9,25 +9,27 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class StadiumService {
 
     private final StadiumRepository stadiumRepository;
+    private final StadiumMapper stadiumMapper;
 
-    public StadiumService(StadiumRepository stadiumRepository) {
+    public StadiumService(StadiumRepository stadiumRepository, StadiumMapper stadiumMapper) {
         this.stadiumRepository = stadiumRepository;
+        this.stadiumMapper = stadiumMapper;
     }
+
+    /*==============================================================================*/
 
     public Page<StadiumResponse> getAllStadium(Pageable pageable){
         return stadiumRepository.findAll(pageable)
-                .map(StadiumMapper::toStadiumResponse);
+                .map(stadiumMapper::toStadiumResponse);
     }
 
     public StadiumResponse creat(StadiumRequest stadiumRequest){
-        Stadium saveStadium = stadiumRepository.save(StadiumMapper.toStadium(stadiumRequest));
-        return StadiumMapper.toStadiumResponse(saveStadium);
+        Stadium saveStadium = stadiumRepository.save(stadiumMapper.toStadium(stadiumRequest));
+        return stadiumMapper.toStadiumResponse(saveStadium);
     }
 
 }
