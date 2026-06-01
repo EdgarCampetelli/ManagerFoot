@@ -5,6 +5,7 @@ import dev.estudo.managerFoot.Controller.response.ClubDetailResponse;
 import dev.estudo.managerFoot.Controller.response.ClubResponse;
 import dev.estudo.managerFoot.Mapper.ClubMapper;
 import dev.estudo.managerFoot.Service.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,12 +31,12 @@ public class ClubController {
 
     @GetMapping("/{id}")
     public ClubDetailResponse findAllId(@PathVariable Long id){
-        return clubService.findById(id);
+        return clubMapper.toClubDetailResponse(clubService.findById(id));
     }
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClubDetailResponse create(@RequestBody CreateClubRequest request){
+    public ClubDetailResponse create(@Valid @RequestBody CreateClubRequest request){
         return clubService.create(request);
     }
 }

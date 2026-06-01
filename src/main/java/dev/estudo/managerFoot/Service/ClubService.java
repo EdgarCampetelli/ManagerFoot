@@ -35,8 +35,8 @@ public class ClubService {
                 .map(clubMapper::clubResponse);
     }
 
-    public ClubDetailResponse findById(Long id){
-        return clubMapper.toClubDetailResponse(clubRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("Club not found for id: "+id)));
+    public Club findById(Long id){
+        return clubRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("Club not found for id: "+id));
     }
 
     public ClubDetailResponse create(CreateClubRequest request){

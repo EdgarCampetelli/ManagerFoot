@@ -3,6 +3,7 @@ package dev.estudo.managerFoot.Controller;
 import dev.estudo.managerFoot.Controller.request.StadiumRequest;
 import dev.estudo.managerFoot.Controller.response.StadiumResponse;
 import dev.estudo.managerFoot.Service.StadiumService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class StadiumController {
 
     @PostMapping("/post-stadium")
     @ResponseStatus(HttpStatus.CREATED)
-    public StadiumResponse creat(@RequestBody StadiumRequest stadiumRequest){
+    public StadiumResponse creat(@Valid @RequestBody StadiumRequest stadiumRequest){
         return  stadiumService.creat(stadiumRequest);
     }
 
