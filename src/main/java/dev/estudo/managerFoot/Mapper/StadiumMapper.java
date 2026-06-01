@@ -13,4 +13,5 @@ public interface StadiumMapper {
 
     Stadium toStadium (StadiumRequest stadiumRequest);
 
+    StadiumRequest toRequest (Stadium stadium);
 }

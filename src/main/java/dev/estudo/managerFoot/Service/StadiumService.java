@@ -1,5 +1,6 @@
 package dev.estudo.managerFoot.Service;
 
+import dev.estudo.managerFoot.Controller.exception.ResourceNotFoundException;
 import dev.estudo.managerFoot.Controller.request.StadiumRequest;
 import dev.estudo.managerFoot.Controller.response.StadiumResponse;
 import dev.estudo.managerFoot.Entity.Stadium;
@@ -25,6 +26,10 @@ public class StadiumService {
     public Page<StadiumResponse> getAllStadium(Pageable pageable){
         return stadiumRepository.findAll(pageable)
                 .map(stadiumMapper::toStadiumResponse);
+    }
+
+    public Stadium findById(Long id){
+        return stadiumRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Stadium not found for id: "+id));
     }
 
     public StadiumResponse creat(StadiumRequest stadiumRequest){
