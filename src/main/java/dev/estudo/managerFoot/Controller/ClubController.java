@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,23 +30,27 @@ public class ClubController {
         this.playerService = playerService;
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read','SCOPE_admin:all')")
     @GetMapping("/readAll")
     @ResponseStatus(HttpStatus.OK)
     public Page<ClubResponse> findAll(Pageable pageable){
         return clubService.readAll(pageable);
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read','SCOPE_admin:all')")
     @GetMapping("/{id}")
     public ClubDetailResponse findAllId(@PathVariable Long id){
         return clubMapper.toClubDetailResponse(clubService.findById(id));
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:write','SCOPE_admin:all')")
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ClubDetailResponse create(@Valid @RequestBody CreateClubRequest request){
         return clubService.create(request);
     }
 
+    @PreAuthorize("hasAnyAuthority('SCOPE_club:read','SCOPE_admin:all')")
     @GetMapping("/{id}/players")
     @ResponseStatus(HttpStatus.OK)
     public List<PlayerResponse> findPlayersClub(@PathVariable Long id){
