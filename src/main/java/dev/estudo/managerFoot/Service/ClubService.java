@@ -4,6 +4,7 @@ import dev.estudo.managerFoot.Controller.exception.ResourceNotFoundException;
 import dev.estudo.managerFoot.Controller.request.CreateClubRequest;
 import dev.estudo.managerFoot.Controller.response.ClubDetailResponse;
 import dev.estudo.managerFoot.Controller.response.ClubResponse;
+import dev.estudo.managerFoot.Controller.response.PlayerResponse;
 import dev.estudo.managerFoot.Entity.Club;
 import dev.estudo.managerFoot.Mapper.ClubMapper;
 import dev.estudo.managerFoot.Mapper.StadiumMapper;
@@ -21,12 +22,10 @@ public class ClubService {
 
     private final ClubRepository clubRepository;
     private final StadiumService stadiumService;
-    private final StadiumMapper stadiumMapper;
     private final ClubMapper clubMapper;
     public ClubService(ClubRepository clubRepository, StadiumService stadiumService, StadiumMapper stadiumMapper, ClubMapper clubMapper) {
         this.clubRepository = clubRepository;
         this.stadiumService = stadiumService;
-        this.stadiumMapper = stadiumMapper;
         this.clubMapper = clubMapper;
     }
 
