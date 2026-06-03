@@ -25,8 +25,9 @@ public class Club {
     private String name;
     private LocalDate founded;
     private String url_img;
-    private LocalDateTime created_at;
-    private boolean active;
+
+    private LocalDateTime created_at = LocalDateTime.now();
+    private boolean active = true;
 
     @OneToOne
     @JoinColumn(name = "stadium_id")
